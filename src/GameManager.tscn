@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=2]
+[ext_resource path="res://src/Menu/Menu.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="GameManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameViewport" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="gameViewport"]
+size = Vector2( 640, 360 )
+own_world = true
+handle_input_locally = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
+render_target_update_mode = 3
+audio_listener_enable_2d = true
+
+[node name="LevelHolder" type="Node2D" parent="gameViewport/Viewport"]
+
+[node name="menuViewport" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="menuViewport"]
+size = Vector2( 480, 270 )
+own_world = true
+handle_input_locally = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
+render_target_update_mode = 3
+audio_listener_enable_2d = true
+
+[node name="Menu" parent="menuViewport/Viewport" instance=ExtResource( 3 )]
+
+[node name="Debug" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BootSplash" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="BootSplash"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BootSplash"]
+autoplay = "start"
+anims/start = SubResource( 1 )
