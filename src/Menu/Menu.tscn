@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/Menu/Menu.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/menu/inactiveButton.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/menu/hoverButton.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/menu/pressedButton.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/menu/activeButton.png" type="Texture" id=6]
-[ext_resource path="res://assets/fonts/MenuFont.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Src/Menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu/nbSplash.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menu/inactiveButton.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu/hoverButton.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Menu/pressedButton.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Menu/activeButton.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=7]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -23,8 +23,12 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="Main" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonExit" type="TextureButton" parent="Main"]
 anchor_left = 0.5
@@ -114,20 +118,19 @@ __meta__ = {
 }
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ButtonLights" type="TextureButton" parent="Settings"]
+[node name="ButtonSound" type="TextureButton" parent="Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -64.0
-margin_top = 224.0
+margin_top = 128.0
 margin_right = 64.0
-margin_bottom = 248.0
+margin_bottom = 152.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -136,7 +139,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="RichTextLabel" parent="Settings/ButtonLights"]
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonSound"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -146,8 +149,70 @@ margin_bottom = -4.0
 mouse_filter = 1
 custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Lights: On[/center]"
-text = "Lights: On"
+bbcode_text = "[center]Sound: On[/center]"
+text = "Sound: On"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonMusic" type="TextureButton" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 160.0
+margin_right = 64.0
+margin_bottom = 184.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonMusic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Music: On[/center]"
+text = "Music: On"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonFullscreen" type="TextureButton" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 192.0
+margin_right = 64.0
+margin_bottom = 216.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonFullscreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Fullscreen: Off[/center]"
+text = "Fullscreen: Off"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -206,5 +271,7 @@ text = "Version"
 [connection signal="button_up" from="Main/ButtonExit" to="." method="_on_ButtonExit_button_up"]
 [connection signal="button_up" from="Main/ButtonSettings" to="." method="_on_ButtonSettings_button_up"]
 [connection signal="button_up" from="Main/ButtonPlay" to="." method="_on_ButtonPlay_button_up"]
-[connection signal="button_up" from="Settings/ButtonLights" to="." method="_on_ButtonLights_button_up"]
+[connection signal="button_up" from="Settings/ButtonSound" to="." method="_on_ButtonSound_button_up"]
+[connection signal="button_up" from="Settings/ButtonMusic" to="." method="_on_ButtonMusic_button_up"]
+[connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]

@@ -19,14 +19,15 @@ config/name="NbGodotBoilerplate"
 config/description="This is a simple kickstarter project for NimbleBeasts projects. It comes with some standard features and little helpers as well as a some stuff, no one has time for in a game jam.
 "
 run/main_scene="res://src/GameManager.tscn"
-boot_splash/image="res://assets/art/menu/nbSplash.png"
+boot_splash/image="res://Assets/Menu/nbSplash.png"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://src/autoloads/Global.gd"
-Types="*res://src/autoloads/Types.gd"
-Debug="*res://src/autoloads/Debug.gd"
+Global="*res://Src/_Autoloads/Global.gd"
+Types="*res://Src/_Autoloads/Types.gd"
+Events="*res://Src/_Autoloads/Events.gd"
+Debug="*res://Src/_Autoloads/Debug.gd"
 
 [display]
 
