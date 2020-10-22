@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/activeButton.png-42f281e9195a311e55eacdacfdbcd388.stex"
+path="res://.import/nbSplash.png-cb21c436fe6eb6d28d490e3e4c6adabe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/menu/activeButton.png"
-dest_files=[ "res://.import/activeButton.png-42f281e9195a311e55eacdacfdbcd388.stex" ]
+source_file="res://Assets/Menu/nbSplash.png"
+dest_files=[ "res://.import/nbSplash.png-cb21c436fe6eb6d28d490e3e4c6adabe.stex" ]
 
 [params]
 

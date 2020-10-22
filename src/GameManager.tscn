@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/GameManager.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=2]
-[ext_resource path="res://src/Menu/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Src/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu/nbSplash.png" type="Texture" id=2]
+[ext_resource path="res://Src/Menu/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Src/AudioPlayer/AudioPlayer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "start"
@@ -74,6 +75,7 @@ __meta__ = {
 }
 
 [node name="BootSplash" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -89,3 +91,5 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BootSplash"]
 autoplay = "start"
 anims/start = SubResource( 1 )
+
+[node name="AudioPlayer" parent="." instance=ExtResource( 4 )]
