@@ -1,8 +1,10 @@
 # NimbleBeasts Godot Boilerplate
 
+![](_itch/logo.png)
+
 ## About
 
-This is a simple kickstarter project for NimbleBeasts projects. It comes with some standard features and little helpers as well as a some stuff, no one has time for in a game jam.
+This is a simple kickstarter project for Godot projects. It comes with some standard features and little helpers as well as some stuff, no one has time for in a game jam.
 
 ## Some Features
 
@@ -179,6 +181,8 @@ Events.emit_signal("play_sound", "menu_click", 1.0, pos)
 ## Debug Console
 
 While the project is running press F4 to open the console. You can add multiple categories with multiple options. This is useful for e.g. level change, respawn and set turn/life/ammo/stuff.
+
+![](_itch/screenshot_debug.png)
 
 This is an example using the console on a player node:
 
