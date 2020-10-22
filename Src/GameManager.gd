@@ -4,6 +4,10 @@ var state = Types.GameStates.Menu
 var levelNode = null
 
 func _ready():
+	# Set Viewport Sizes to Project Settings
+	$gameViewport/Viewport.size = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
+	$menuViewport/Viewport.size = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
+	
 	Global.debugLabel = $Debug
 
 	# Event Hooks
@@ -12,11 +16,7 @@ func _ready():
 	Events.connect_signal("switch_fullscreen", self, "_switchFullscreen")
 	Events.connect_signal("new_game", self, "_newGame")
 	Events.connect_signal("menu_back", self, "_backToMenu")
-	
-	# Set Viewport Sizes to Project Settings
-	$gameViewport/Viewport.size = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
-	$menuViewport/Viewport.size = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
-	
+
 	switchTo(Types.GameStates.Menu)
 
 # State Transition Function
