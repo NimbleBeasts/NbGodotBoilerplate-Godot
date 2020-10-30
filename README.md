@@ -77,14 +77,16 @@ In previous version of this boilerplate the GameManager was the central gateway 
 ## Signal Driven Events
 
 Before the 'Signal Driven Events' where included there was the idea of getting rid of get_parent() cascades. In a first approach we introduced the GameManager node which was linked in the Global.gd and therefore accessible from all nodes. As this became very intransparent, we've decided to utilize Godot Signals.
-To make them accessible globally, all (global) signals are defined in the Events.gd. Also providing a 'connect_signal' function to use it everywhere.
+To make them accessible globally, all (global) signals are defined in the Events.gd. Also providing a 'connect' function to use it everywhere.
 
 So why is it cool anyway?
 
 **Interacting with a node from multiple locations**
+
 So we all need an accoustic feedback for button clicks. If you have an ingame menu and also the main menu. You could put in both scenes an AudioStreamPlayer. But if you change something (pitch, volume, sound effect...) you will also have to adapt it in the other node or make a own scene for it. With Events.gd you can simply emit a signal to play the sound.
 
 **No get_parent() cascades**
+
 When the player needs to interact with the camera, e.g. scene transition, shake, .., you may have to find the camera first. E.g. get_parent().get_parent().get_node("Camera2D"). If you add another node inbetween you will also have to adapt the cascade. Or you can just simply emit a signal like:
 
 ```
@@ -92,6 +94,7 @@ Events.emit_signal("move_camera", position)
 ```
 
 **Calling code in multiple nodes**
+
 Especially in mobile games you have a button to mute the sound or music. But you also can change it in the menu. To keep the indications (on/off) synced, the boilerplate utilizes signals.
 
 ```
@@ -103,18 +106,27 @@ Via the event hooking the emited signal is processed in multiple locations:
 
 ```
 # HUD.gd
-Events.connect_signal("switch_sound", self, "updateSoundButtonIndication")
+Events.connect("switch_sound", self, "updateSoundButtonIndication")
 ```
 
 ```
 # Menu.gd
-Events.connect_signal("switch_sound", self, "updateSoundButtonIndication")
+Events.connect("switch_sound", self, "updateSoundButtonIndication")
 ```
+
+**Debug Options**
+
+We currently provide two ways for better signal debug support.
+
+1. Setting DEBUG_OUTPUT_ON_SIGNAL_CONNECT in Events.gd to output every connection made
+2. Calling Events.debugGetSignalConnectionList("signal_name") to console log the connected nodes for a signal
+
+In the future updates we plan to expand our Debug Console to provide cooler debugging features.
 
 **Workflow**
 
 1. Define a new signal in the Events.gd
-2. Hook on the signal using 'Events.connect_signal(...)'
+2. Hook on the signal using 'Events.connect(...)'
 3. Emit signal using 'Events.emit_signal(...)'
 
 ---
