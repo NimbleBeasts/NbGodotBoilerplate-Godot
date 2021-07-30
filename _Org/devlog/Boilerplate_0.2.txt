@@ -1,0 +1,10 @@
+[color=#ffad3b][b]NimbleBeasts Boilerplate[/b][/color]
+This is a simple kickstarter project for Godot projects. It comes with some standard features and little helpers as well as some stuff, no one has time for in a game jam.
+
+[color=#ffad3b][b]Changelog[/b][/color]
+[b]Release 0.2 [/b][code]2021-07-30[/code]
+- Added: DevLogViewer
+- Added: New window management
+- Added: Music & sound volumes
+[b]Release 0.1 [/b][code]2021-04-11[/code]
+- First release
