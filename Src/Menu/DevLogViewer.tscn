@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Src/Menu/DevLogViewer.gd" type="Script" id=1]
+
+[node name="DevLogViewer" type="RichTextLabel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+bbcode_enabled = true
+bbcode_text = "Loading DevLog..."
+text = "Loading DevLog..."
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="RetryDelayTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="meta_clicked" from="." to="." method="_on_DevLogViewer_meta_clicked"]
+[connection signal="timeout" from="RetryDelayTimer" to="." method="_on_RetryDelayTimer_timeout"]

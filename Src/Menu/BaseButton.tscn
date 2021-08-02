@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Src/Menu/BaseButton.gd" type="Script" id=1]
+[ext_resource path="res://Src/Menu/BaseButtonTheme.tres" type="Theme" id=2]
+
+[node name="BaseButton" type="Button"]
+margin_right = 192.0
+margin_bottom = 24.0
+theme = ExtResource( 2 )
+text = "Dummy Button"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_up" from="." to="." method="_on_BaseButton_button_up"]

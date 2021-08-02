@@ -13,10 +13,15 @@ func _ready():
 
 	switchTo(MenuState.Main)
 
-# Play menu button sound
-func playClick():
-	Events.emit_signal("play_sound", "menu_click")
 
+	#Populate Resolution List
+	for res in Global.supportedResolutions:
+		$Settings/TabContainer/Graphics/ResolutionList.add_item(str(res.x) + "x" + str(res.y))
+		
+		var resolution = Vector2(Global.userConfig.resolution.w, Global.userConfig.resolution.h)
+		if resolution == res:
+			var id = $Settings/TabContainer/Graphics/ResolutionList.get_item_count() - 1
+			$Settings/TabContainer/Graphics/ResolutionList.select(id, true)
 # Menu State Transition
 func switchTo(to):
 	hideAllMenuScenes()
@@ -38,20 +43,23 @@ func hideAllMenuScenes():
 
 # Helper function to update the config labels
 func updateSettings():
-	if Global.userConfig.sound:
-		$Settings/ButtonSound/Text.bbcode_text = "[center]Sound: On[/center]"
-	else:
-		$Settings/ButtonSound/Text.bbcode_text = "[center]Sound: Off[/center]"
+	$Settings/TabContainer/Sounds/SoundSlider.value = Global.userConfig.soundVolume
+	$Settings/TabContainer/Sounds/SoundSlider/Value.set_text(str(Global.userConfig.soundVolume*10) + "%")
+
+	$Settings/TabContainer/Sounds/MusicSlider.value = Global.userConfig.musicVolume
+	$Settings/TabContainer/Sounds/MusicSlider/Value.set_text(str(Global.userConfig.musicVolume*10) + "%")
+
+	$Settings/TabContainer/General/BrightnessSlider.value = Global.userConfig.brightness
+	$Settings/TabContainer/General/BrightnessSlider/Value.set_text("%.2f" % Global.userConfig.brightness)
+
+	$Settings/TabContainer/General/ContrastSlider.value = Global.userConfig.contrast
+	$Settings/TabContainer/General/ContrastSlider/Value.set_text("%.2f" % Global.userConfig.brightness)
 	
-	if Global.userConfig.music:
-		$Settings/ButtonMusic/Text.bbcode_text = "[center]Music: On[/center]"
-	else:
-		$Settings/ButtonMusic/Text.bbcode_text = "[center]Music: Off[/center]"
 
 	if Global.userConfig.fullscreen:
-		$Settings/ButtonFullscreen/Text.bbcode_text = "[center]Fullscreen: On[/center]"
+		$Settings/TabContainer/Graphics/FullscreenButton.text = "On"
 	else:
-		$Settings/ButtonFullscreen/Text.bbcode_text = "[center]Fullscreen: Off[/center]"
+		$Settings/TabContainer/Graphics/FullscreenButton.text = "Off"
 
 ###############################################################################
 # Callbacks
@@ -75,12 +83,10 @@ func _back():
 
 
 func _on_ButtonPlay_button_up():
-	playClick()
 	Events.emit_signal("new_game")
 
 
 func _on_ButtonSettings_button_up():
-	playClick()
 	switchTo(MenuState.Settings)
 
 
@@ -89,26 +95,47 @@ func _on_ButtonExit_button_up():
 	get_tree().quit()
 
 
-func _on_ButtonBack_button_up():
-	playClick()
+func _on_BackButton_button_up():
 	switchTo(MenuState.Main)
 
-
 func _on_ButtonSound_button_up():
-	playClick()
 	Events.emit_signal("switch_sound", !Global.userConfig.sound)
 
 
 func _on_ButtonMusic_button_up():
-	playClick()
 	Events.emit_signal("switch_music", !Global.userConfig.music)
 
 
-func _on_ButtonFullscreen_button_up():
-	playClick()
-	Events.emit_signal("switch_fullscreen", !Global.userConfig.fullscreen)
-	updateSettings()
+func _on_FullscreenButton_button_up():
+	if not Global.userConfig.fullscreen:
+		$Settings/TabContainer/Graphics/FullscreenButton.text = "On"
+	else:
+		$Settings/TabContainer/Graphics/FullscreenButton.text = "Off"
+		
+	Events.emit_signal("cfg_switch_fullscreen", !Global.userConfig.fullscreen)
 
 
+func _on_ApplyButton_button_up():
+	var id = $Settings/TabContainer/Graphics/ResolutionList.get_selected_items()[0]
+	Global.setResolution(id)
+
+func _on_SoundSlider_value_changed(value):
+	$Settings/TabContainer/Sounds/SoundSlider/Value.set_text(str(value*10) + "%")
+	Events.emit_signal("cfg_sound_set_volume", value)
+
+
+func _on_MusicSlider_value_changed(value):
+	$Settings/TabContainer/Sounds/MusicSlider/Value.set_text(str(value*10) + "%")
+	Events.emit_signal("cfg_music_set_volume", value)
+
+
+func _on_BrightnessSlider_value_changed(value):
+	$Settings/TabContainer/General/BrightnessSlider/Value.set_text("%.2f" % value)
+	Events.emit_signal("cfg_change_brightness", value)
+
+
+func _on_ContrastSlider_value_changed(value):
+	$Settings/TabContainer/General/ContrastSlider/Value.set_text("%.2f" % value)
+	Events.emit_signal("cfg_change_contrast", value)
 
 
