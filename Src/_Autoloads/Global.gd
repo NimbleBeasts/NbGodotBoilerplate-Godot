@@ -218,12 +218,10 @@ func switchResolution():
 # Perform Fullscreen Switch
 func switchFullscreen():
 	if not userConfig.fullscreen:
-		print("fullscreen false")
 		OS.window_fullscreen = false
 		switchResolution()
 		
 	else:
-		print("fullscreen true")
 		OS.window_fullscreen = true
 
 # PRNG
