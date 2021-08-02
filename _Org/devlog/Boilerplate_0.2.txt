@@ -3,6 +3,10 @@ This is a simple kickstarter project for Godot projects. It comes with some stan
 
 [color=#ffad3b][b]Changelog[/b][/color]
 [b]Release 0.2 [/b][code]2021-07-30[/code]
+- Rework: Resolution and fullscreen support
+- Rework: Sound and music volume
+- Rework: Menu buttons
+- Added: Gamma and contrast
 - Added: DevLogViewer
 - Added: New window management
 - Added: Music & sound volumes

@@ -1,0 +1,22 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+background_mode = 4
+auto_exposure_max_luma = 2.74
+ssao_radius = 17.62
+ssao_intensity = 36.58
+ssao_radius2 = 29.11
+ssao_intensity2 = 42.13
+ssao_bias = 3.302
+ssao_light_affect = 0.86
+ssao_ao_channel_affect = 0.22
+dof_blur_far_distance = 406.39
+dof_blur_near_distance = 0.01
+glow_intensity = 0.51
+glow_strength = 0.86
+glow_bloom = 0.1
+glow_blend_mode = 1
+glow_hdr_threshold = 0.16
+glow_hdr_luminance_cap = 12.92
+glow_hdr_scale = 2.19
+adjustment_enabled = true

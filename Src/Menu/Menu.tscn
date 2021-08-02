@@ -30,7 +30,6 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="Main" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -75,6 +74,7 @@ custom_fonts/bold_font = ExtResource( 11 )
 custom_fonts/normal_font = ExtResource( 10 )
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -93,7 +93,6 @@ __meta__ = {
 }
 
 [node name="General" type="Tabs" parent="Settings/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 21.0
@@ -165,6 +164,7 @@ custom_fonts/font = ExtResource( 7 )
 text = "1.00"
 
 [node name="Graphics" type="Tabs" parent="Settings/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 21.0
@@ -207,6 +207,7 @@ __meta__ = {
 }
 
 [node name="Sounds" type="Tabs" parent="Settings/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 21.0

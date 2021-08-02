@@ -8,7 +8,7 @@ func _ready():
 	setMusicVolume(Global.userConfig.musicVolume)
 	setSoundVolume(Global.userConfig.soundVolume)
 	# Event Hooks
-	Events.connect_signal("play_sound", self, "_playSound")
+	Events.connect("play_sound", self, "_playSound")
 	Events.connect("play_music", self, "onPlayMusic")
 	
 	Events.connect("cfg_music_set_volume", self, "setMusicVolume")

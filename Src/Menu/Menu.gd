@@ -4,10 +4,8 @@ enum MenuState {Main, Settings}
 
 func _ready():
 	# Event Hooks
-	Events.connect_signal("menu_back", self, "_back")
-	Events.connect_signal("switch_sound", self, "_switchSound")
-	Events.connect_signal("switch_music", self, "_switchMusic")
-	Events.connect_signal("switch_fullscreen", self, "_switchFullscreen")
+	Events.connect("menu_back", self, "_back")
+	Events.connect("cfg_switch_fullscreen", self, "_switchFullscreen")
 
 	$Version.bbcode_text = "[right]"+ Global.getVersionString() + "[/right]"
 
