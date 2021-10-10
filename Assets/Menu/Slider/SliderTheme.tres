@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Menu/Slider/grabber-item.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Menu/Slider/tick.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menu/Slider/grabber-item-selected.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu/Slider/grabber.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Menu/Slider/slider.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Menu/Slider/grabber2.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 12, 6 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 12, 6 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 12, 6 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[resource]
+HSlider/icons/grabber = ExtResource( 1 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 3 )
+HSlider/icons/tick = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 1 )
+HSlider/styles/grabber_area_highlight = SubResource( 2 )
+HSlider/styles/slider = SubResource( 3 )

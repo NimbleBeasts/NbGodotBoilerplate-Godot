@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/inactiveButton.png-16ed8f484b4464eb61cba25108a1344d.stex"
+path="res://.import/grabber-item.png-8378c6544d064237369492a41c47ffb2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Menu/inactiveButton.png"
-dest_files=[ "res://.import/inactiveButton.png-16ed8f484b4464eb61cba25108a1344d.stex" ]
+source_file="res://Assets/Menu/Slider/grabber-item.png"
+dest_files=[ "res://.import/grabber-item.png-8378c6544d064237369492a41c47ffb2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

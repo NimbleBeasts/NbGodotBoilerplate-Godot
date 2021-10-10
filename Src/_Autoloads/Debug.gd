@@ -16,6 +16,8 @@ extends Node
 # func test(val: bool):
 # 	...
 
+#warning-ignore-all:unused_class_variable
+
 var isMenuOpen = false
 var subMenu = 0 
 var zeroPressed = false

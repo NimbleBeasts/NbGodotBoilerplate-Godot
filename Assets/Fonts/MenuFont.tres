@@ -4,5 +4,6 @@
 
 [resource]
 outline_size = 1
-outline_color = Color( 0.243137, 0.129412, 0.215686, 1 )
+outline_color = Color( 0.101961, 0.109804, 0.172549, 1 )
+use_mipmaps = true
 font_data = ExtResource( 1 )
