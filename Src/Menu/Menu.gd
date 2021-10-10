@@ -14,7 +14,7 @@ func _ready():
 
 	#Populate Resolution List
 	for res in Global.supportedResolutions:
-		$Settings/TabContainer/Graphics/ResolutionList.add_item(str(res.x) + "x" + str(res.y))
+		$Settings/TabContainer/Graphics/ResolutionList.add_item(" " + str(res.x) + "x" + str(res.y))
 		
 		var resolution = Vector2(Global.userConfig.resolution.w, Global.userConfig.resolution.h)
 		if resolution == res:
