@@ -16,6 +16,7 @@ This is a simple kickstarter project for Godot projects. It comes with some stan
 - Global Enums (Types.gd)
 - Debug Console Menu (Debug.gd)
 - Helper functions
+- Lot more
 
 ---
 
