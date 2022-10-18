@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc4m8ky5t0vnn"]
+
+[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Choice_Button.gd" id="1_wh40g"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_lcms7"]
+
+[node name="ChoiceButton" type="Control"]
+custom_minimum_size = Vector2i(512, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 40.0
+focus_mode = 2
+script = ExtResource("1_wh40g")
+config_value = null
+
+[node name="Bg" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.956863, 0.956863, 0.956863, 0.862745)
+
+[node name="h" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+
+[node name="Label" type="Label" parent="h"]
+offset_top = 7.0
+offset_right = 40.0
+offset_bottom = 33.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+theme_override_fonts/font = ExtResource("2_lcms7")
+text = "TITLE"
+
+[node name="Filler" type="Control" parent="h"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 44.0
+offset_right = 228.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="ButtonLast" type="Label" parent="h"]
+custom_minimum_size = Vector2i(40, 0)
+offset_left = 232.0
+offset_top = 7.0
+offset_right = 272.0
+offset_bottom = 33.0
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+text = "<"
+horizontal_alignment = 1
+
+[node name="Option" type="Label" parent="h"]
+custom_minimum_size = Vector2i(192, 0)
+offset_left = 276.0
+offset_top = 7.0
+offset_right = 468.0
+offset_bottom = 33.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+theme_override_fonts/font = ExtResource("2_lcms7")
+text = "OPTION1"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="ButtonNext" type="Label" parent="h"]
+custom_minimum_size = Vector2i(40, 0)
+offset_left = 472.0
+offset_top = 7.0
+offset_right = 512.0
+offset_bottom = 33.0
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+text = ">"
+horizontal_alignment = 1
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="h/ButtonLast" to="." method="_on_button_last_gui_input"]
+[connection signal="gui_input" from="h/ButtonNext" to="." method="_on_button_next_gui_input"]

@@ -6,7 +6,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 bbcode_enabled = true
-bbcode_text = "Loading DevLog..."
+text = "Loading DevLog..."
 text = "Loading DevLog..."
 script = ExtResource( 1 )
 __meta__ = {

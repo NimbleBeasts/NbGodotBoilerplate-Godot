@@ -6,10 +6,16 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[  ]
+_global_script_classes=[{
+"base": "RandomNumberGenerator",
+"class": &"Core_RandomNumberGenerator",
+"language": &"GDScript",
+"path": "res://NbCore/Core_RandomNumberGenerator.gd"
+}]
 _global_script_class_icons={
+"Core_RandomNumberGenerator": ""
 }
 
 [application]
@@ -18,6 +24,7 @@ config/name="NbGodotBoilerplate"
 config/description="This is a simple kickstarter project for NimbleBeasts projects. It comes with some standard features and little helpers as well as a some stuff, no one has time for in a game jam.
 "
 run/main_scene="res://Src/GameManager.tscn"
+config/features=PackedStringArray("4.0")
 boot_splash/image="res://Assets/Menu/nbSplash.png"
 config/icon="res://icon.png"
 
@@ -34,10 +41,11 @@ gdscript/warnings/return_value_discarded=false
 
 [display]
 
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="2d"
 window/size/width=640
 window/size/height=360
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
 
 [importer_defaults]
 
@@ -61,6 +69,10 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/english_only.en.translation")
 
 [rendering]
 

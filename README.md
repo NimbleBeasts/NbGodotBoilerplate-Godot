@@ -2,6 +2,11 @@
 
 ![](_itch/logo.png)
 
+## Development Branch
+The master branch is used for development purpose. Currently porting to Godot 4.0 and a lot of reworks based on our latest games.
+Please consider godot-3 branch for a stable version.
+
+
 ## About
 
 This is a simple kickstarter project for Godot projects. It comes with some standard features and little helpers as well as some stuff, no one has time for in a game jam.

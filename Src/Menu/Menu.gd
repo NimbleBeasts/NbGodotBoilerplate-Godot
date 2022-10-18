@@ -4,19 +4,19 @@ enum MenuState {Main, Settings}
 
 func _ready():
 	# Event Hooks
-	Events.connect("menu_back", self, "_back")
-	Events.connect("cfg_switch_fullscreen", self, "_switchFullscreen")
+	Events.connect("menu_back",Callable(self,"_back"))
+	Events.connect("cfg_switch_fullscreen",Callable(self,"_switchFullscreen"))
 
-	$Version.bbcode_text = "[right]"+ Global.getVersionString() + "[/right]"
+	$Version.text = "[right]"+ Global.get_version_string(Global.GAME_VERSION) + "[/right]"
 
 	switchTo(MenuState.Main)
 
 
 	#Populate Resolution List
-	for res in Global.supportedResolutions:
+	for res in Global.core_config.video.supported_resolutions:
 		$Settings/TabContainer/Graphics/ResolutionList.add_item(" " + str(res.x) + "x" + str(res.y))
-		
-		var resolution = Vector2(Global.userConfig.resolution.w, Global.userConfig.resolution.h)
+
+		var resolution = Vector2(Global.user_config.resolution.w, Global.user_config.resolution.h)
 		if resolution == res:
 			var id = $Settings/TabContainer/Graphics/ResolutionList.get_item_count() - 1
 			$Settings/TabContainer/Graphics/ResolutionList.select(id, true)
@@ -41,20 +41,20 @@ func hideAllMenuScenes():
 
 # Helper function to update the config labels
 func updateSettings():
-	$Settings/TabContainer/Sounds/SoundSlider.value = Global.userConfig.soundVolume
-	$Settings/TabContainer/Sounds/SoundSlider/Value.set_text(str(Global.userConfig.soundVolume*10) + "%")
+	$Settings/TabContainer/Sounds/SoundSlider.value = Global.user_config.soundVolume
+	$Settings/TabContainer/Sounds/SoundSlider/Value.set_text(str(Global.user_config.soundVolume*10) + "%")
 
-	$Settings/TabContainer/Sounds/MusicSlider.value = Global.userConfig.musicVolume
-	$Settings/TabContainer/Sounds/MusicSlider/Value.set_text(str(Global.userConfig.musicVolume*10) + "%")
+	$Settings/TabContainer/Sounds/MusicSlider.value = Global.user_config.musicVolume
+	$Settings/TabContainer/Sounds/MusicSlider/Value.set_text(str(Global.user_config.musicVolume*10) + "%")
 
-	$Settings/TabContainer/General/BrightnessSlider.value = Global.userConfig.brightness
-	$Settings/TabContainer/General/BrightnessSlider/Value.set_text("%.2f" % Global.userConfig.brightness)
+	$Settings/TabContainer/General/BrightnessSlider.value = Global.user_config.brightness
+	$Settings/TabContainer/General/BrightnessSlider/Value.set_text("%.2f" % Global.user_config.brightness)
 
-	$Settings/TabContainer/General/ContrastSlider.value = Global.userConfig.contrast
-	$Settings/TabContainer/General/ContrastSlider/Value.set_text("%.2f" % Global.userConfig.brightness)
-	
+	$Settings/TabContainer/General/ContrastSlider.value = Global.user_config.contrast
+	$Settings/TabContainer/General/ContrastSlider/Value.set_text("%.2f" % Global.user_config.brightness)
 
-	if Global.userConfig.fullscreen:
+
+	if Global.user_config.fullscreen:
 		$Settings/TabContainer/Graphics/FullscreenButton.text = "On"
 	else:
 		$Settings/TabContainer/Graphics/FullscreenButton.text = "Off"
@@ -97,20 +97,20 @@ func _on_BackButton_button_up():
 	switchTo(MenuState.Main)
 
 func _on_ButtonSound_button_up():
-	Events.emit_signal("switch_sound", !Global.userConfig.sound)
+	Events.emit_signal("switch_sound", !Global.user_config.sound)
 
 
 func _on_ButtonMusic_button_up():
-	Events.emit_signal("switch_music", !Global.userConfig.music)
+	Events.emit_signal("switch_music", !Global.user_config.music)
 
 
 func _on_FullscreenButton_button_up():
-	if not Global.userConfig.fullscreen:
+	if not Global.user_config.fullscreen:
 		$Settings/TabContainer/Graphics/FullscreenButton.text = "On"
 	else:
 		$Settings/TabContainer/Graphics/FullscreenButton.text = "Off"
-		
-	Events.emit_signal("cfg_switch_fullscreen", !Global.userConfig.fullscreen)
+
+	Events.emit_signal("cfg_switch_fullscreen", !Global.user_config.fullscreen)
 
 
 func _on_ApplyButton_button_up():

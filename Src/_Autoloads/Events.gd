@@ -1,8 +1,6 @@
-extends Node
+extends "res://NbCore/Events.gd"
 
 #warning-ignore-all:unused_signal
-
-const DEBUG_OUTPUT_ON_SIGNAL_CONNECT = false
 
 ###############################################################################
 # Global Signal List
@@ -12,10 +10,12 @@ const DEBUG_OUTPUT_ON_SIGNAL_CONNECT = false
 signal new_game()
 
 # Sound
-signal play_sound(sound, volume, pos)
+signal play_sound(sound)
 # Music
 signal play_music(track)
+signal change_music(track_id)
 # Menu Related
+signal menu_popup()
 signal menu_back()
 
 ###########################################################################

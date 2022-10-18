@@ -1,0 +1,10 @@
+res://Src/Hud/Menu_Modern/Choice_Button.tscn
+res://Src/Hud/Menu_Modern/Menu_Modern.theme
+res://Src/Hud/Menu_Modern/Choice_Button.gd
+res://Src/GameManager.tscn
+res://Src/Hud/hud.tscn
+res://Src/Hud/Menu_Modern/Menu_Modern.tscn
+res://Src/Hud/Menu_Modern/Menu_Modern.gd
+res://Src/_Autoloads/Global.gd
+res://default_environment.tres
+res://Src/AudioPlayer/AudioPlayer.gd

@@ -23,4 +23,3 @@ stream = ExtResource( 1 )
 volume_db = -16.0
 pitch_scale = 0.6
 bus = "Music"
-

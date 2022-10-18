@@ -1,0 +1,217 @@
+[gd_scene load_steps=7 format=3 uid="uid://h0cd34qp2x1g"]
+
+[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Menu_Modern.gd" id="1_2d2qc"]
+[ext_resource type="Shader" path="res://Src/Hud/Menu_Modern/blur.gdshader" id="1_ya4wp"]
+[ext_resource type="Texture2D" uid="uid://bvge8li0uvu6s" path="res://Assets/test2.png" id="3_b6yx7"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="3_e0p0v"]
+[ext_resource type="Theme" uid="uid://b3q625u7kqhr4" path="res://Src/Hud/Menu_Modern/Menu_Modern.theme" id="5_cqgsv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xd3ah"]
+shader = ExtResource("1_ya4wp")
+shader_parameter/blur_amount = 0.4
+shader_parameter/blur_factor = 2.0
+shader_parameter/color = Color(0.121569, 0.141176, 0.294118, 1)
+shader_parameter/color_amount = 0.4
+
+[node name="Menu" type="ColorRect"]
+material = SubResource("ShaderMaterial_xd3ah")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.152941, 0.752941, 1)
+script = ExtResource("1_2d2qc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+scale = Vector2(0.5, 0.511111)
+texture = ExtResource("3_b6yx7")
+centered = false
+
+[node name="BgOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.278431)
+
+[node name="Views" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="Control" parent="Views"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v" type="VBoxContainer" parent="Views/MainMenu"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 216.0
+offset_right = 258.0
+offset_bottom = -16.0
+grow_vertical = 2
+alignment = 2
+
+[node name="ButtonResume" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 48.0
+offset_right = 226.0
+offset_bottom = 88.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_RESUME_GAME"
+clip_text = true
+alignment = 0
+
+[node name="ButtonNewGame" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 92.0
+offset_right = 226.0
+offset_bottom = 132.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_NEW_GAME"
+clip_text = true
+alignment = 0
+
+[node name="ButtonSaveGame" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 136.0
+offset_right = 226.0
+offset_bottom = 176.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_SAVE_GAME"
+clip_text = true
+alignment = 0
+
+[node name="ButtonLoadGame" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 180.0
+offset_right = 226.0
+offset_bottom = 220.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_LOAD_GAME"
+clip_text = true
+alignment = 0
+
+[node name="ButtonSettings" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 224.0
+offset_right = 226.0
+offset_bottom = 264.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_SETTINGS"
+clip_text = true
+alignment = 0
+
+[node name="ButtonQuit" type="Button" parent="Views/MainMenu/v"]
+custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
+offset_top = 268.0
+offset_right = 226.0
+offset_bottom = 308.0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_QUIT"
+clip_text = true
+alignment = 0
+
+[node name="Settings" type="Control" parent="Views"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="w" type="ColorRect" parent="Views/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 128.0
+offset_right = -32.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.0784314)
+
+[node name="ButtonBack" type="Button" parent="Views/Settings/w"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = 232.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_B_BACK"
+alignment = 0
+
+[node name="Label" type="Label" parent="Views/Settings/w"]
+layout_mode = 0
+offset_top = -40.0
+offset_right = 228.0
+offset_bottom = -3.0
+theme_override_fonts/font = ExtResource("3_e0p0v")
+theme_override_font_sizes/font_size = 24
+text = "TR_MENU_SETTINGS"
+
+[node name="SubMenu" type="VBoxContainer" parent="Views/Settings/w"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = -48.0
+grow_vertical = 2
+
+[node name="OptionMenu" type="VBoxContainer" parent="Views/Settings/w"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -376.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_up" from="Views/MainMenu/v/ButtonResume" to="." method="_on_button_resume_button_up"]
+[connection signal="button_up" from="Views/MainMenu/v/ButtonNewGame" to="." method="_on_button_new_game_button_up"]
+[connection signal="button_up" from="Views/MainMenu/v/ButtonSaveGame" to="." method="_on_button_new_game_button_up"]
+[connection signal="button_up" from="Views/MainMenu/v/ButtonLoadGame" to="." method="_on_button_new_game_button_up"]
+[connection signal="button_up" from="Views/MainMenu/v/ButtonSettings" to="." method="_on_button_settings_button_up"]
+[connection signal="button_up" from="Views/MainMenu/v/ButtonQuit" to="." method="_on_button_quit_button_up"]
+[connection signal="button_up" from="Views/Settings/w/ButtonBack" to="." method="_on_button_back_button_up"]
