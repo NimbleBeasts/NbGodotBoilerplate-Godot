@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://chqjfhru6648u"]
+
+[ext_resource type="Theme" uid="uid://b3q625u7kqhr4" path="res://Src/Hud/Menu_Modern/Menu_Modern.theme" id="1_64ff4"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_nhck1"]
+
+[node name="ButtonQuit2" type="Button"]
+custom_minimum_size = Vector2i(0, 40)
+offset_right = 224.0
+offset_bottom = 40.0
+theme = ExtResource("1_64ff4")
+theme_override_fonts/font = ExtResource("2_nhck1")
+text = "TR_MENU_QUIT"
+clip_text = true
+alignment = 0

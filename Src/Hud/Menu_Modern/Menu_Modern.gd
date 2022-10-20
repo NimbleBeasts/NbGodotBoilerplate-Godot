@@ -2,11 +2,15 @@ extends Control
 
 
 var _settings_update_is_internal := false
-var _submenu_entered := false
+
 
 var _focus_object: Control = null
+var _focus_keyboard: bool = false
+
 
 const THEME := preload("res://Src/Hud/Menu_Modern/Menu_Modern.theme")
+const CHOICE_BUTTON_PATH := "res://Src/Hud/Menu_Modern/Choice_Button.tscn"
+const CATEGORY_BUTTON_PATH := "res://Src/Hud/Menu_Modern/Category_Button.tscn"
 
 
 func _ready():
@@ -14,24 +18,22 @@ func _ready():
 	_setup_option_buttons()
 	
 	_switch("MainMenu")
-	_switch_submenu("SubMenu")
 	
 	get_viewport().connect("gui_focus_changed", Callable(self, "_gui_focus_changed"))
 
+
+func _physics_process(delta):
+	$Label.set_text("Focus: " + str(_focus_object) + "\nKeyboard: " + str(_focus_keyboard))
 
 func _setup_option_buttons():
 	for category in Global.USER_CONFIG_MODEL.configurable:
 		# Setup option buttons
 		var callback = Callable(self, "_submenu_button_up")
-		callback.bind(category.name)
+		callback = callback.bind(category.name)
 		
-		var button = Button.new()
-		button.clip_text = true
-		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		var button = preload(CATEGORY_BUTTON_PATH).instantiate()
 		button.text = tr(category.tr)
 		button.name = category.name
-		button.theme = THEME
-		button.custom_minimum_size = Vector2i(0, 40)
 		button.connect("button_up", callback)
 		$Views/Settings/w/SubMenu.add_child(button)
 #
@@ -39,28 +41,70 @@ func _setup_option_buttons():
 #		for option in category.options:
 #			print(option.name)
 
+func _setup_option_menu(category: String):
+	# Clear old
+	for child in $Views/Settings/w/OptionMenu.get_children():
+		child.queue_free()
+	
+	var index := -1
+	for i in range(Global.USER_CONFIG_MODEL.configurable.size()):
+		if Global.USER_CONFIG_MODEL.configurable[i].name == category:
+			index = i
+			break
+		i += 1
+
+	assert(index != -1, "HUD: Provided category does not exists in user config model")
+	for option in Global.USER_CONFIG_MODEL.configurable[index].options:
+		var callback = Callable(self, "_submenu_button_up")
+		callback = callback.bind(category)
+		callback = callback.bind(option.name)
+		var choice_button = preload(CHOICE_BUTTON_PATH).instantiate()
+		choice_button.text = tr(option.tr)
+		if option.has("values"):
+			choice_button.set_choices(option.values, option.default)
+		else:
+			choice_button.set_range(option.range, option.default)
+		choice_button.connect("button_up", callback)
+		$Views/Settings/w/OptionMenu.add_child(choice_button)
 
 
+func _submenu_choice_button_up(category_name, option_name):
+	print(option_name)
 
 func _submenu_button_up(category_name):
-	print(category_name)
+	print("called")
+	_setup_option_menu(category_name)
+	# TODO: get menu name
+	$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS_VIDEO")
+	$Views/Settings/w/SubMenu.hide()
+	$Views/Settings/w/OptionMenu.show()
+	_focus_object = null
 
 func _input(event):
 	# If no element has focus and the player uses keyboard or gamepad - grab focus
 	if not _focus_object:
 		if event is InputEventKey:
-			if not event.pressed:
+			#if not event.pressed:
 			# TODO: keyboard and gamepad codes
-				if event.keycode == KEY_UP or event.keycode == KEY_DOWN:
+			if event.keycode == KEY_UP or event.keycode == KEY_DOWN:
+				if $Views/MainMenu.visible:
 					if $Views/MainMenu/v/ButtonResume.visible:
 						$Views/MainMenu/v/ButtonResume.grab_focus()
 					else:
 						$Views/MainMenu/v/ButtonNewGame.grab_focus()
+				else:
+					$Views/Settings/w/ButtonBack.grab_focus()
 
 func _gui_focus_changed(control: Control) -> void:
 	_focus_object = control
 	if control != null:
 		print(control.name)
+	
+	if Input.is_action_pressed("ui_down") or Input.is_action_just_released("ui_down")\
+		or Input.is_action_pressed("ui_up") or Input.is_action_just_released("ui_up"):
+		_focus_keyboard = true
+	else:
+		_focus_keyboard = false
 
 func reset():
 	_ready()
@@ -70,21 +114,12 @@ func _switch(to):
 		_update_MainMenu()
 		$Views/Settings.hide()
 		$Views/MainMenu.show()
+		_focus_object = null
 	elif to == "Settings":
 		_update_Settings()
 		$Views/MainMenu.hide()
 		$Views/Settings.show()
-
-func _switch_submenu(to):
-
-	
-	if (to != "SubMenu"):
-		_submenu_entered = true
-	else:
-		_submenu_entered = false
-		$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS")
-	
-	get_node("Views/Settings/w/"+str(to)).show()
+		_focus_object = null
 
 
 func _update_MainMenu():
@@ -120,30 +155,10 @@ func _on_button_resume_button_up():
 
 
 func _on_button_back_button_up():
-	if _submenu_entered:
-		_switch_submenu("SubMenu")
-	else:
+	if $Views/Settings/w/SubMenu.visible:
 		_switch("MainMenu")
-
-# Submenu Buttons
-func _on_button_s_video_button_up():
-	_switch_submenu("SubVideo")
-	$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS_VIDEO")
-
-
-func _on_button_s_audio_button_up():
-	_switch_submenu("SubAudio")
-	$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS_AUDIO")
-
-
-func _on_button_s_controls_button_up():
-	_switch_submenu("SubControls")
-	$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS_CONTROLS")
-
-
-func _on_button_s_language_button_up():
-	_switch_submenu("SubLanguage")
-	$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS_LANGUAGE")
-
-
+	else:
+		$Views/Settings/w/Label.set_text("TR_MENU_SETTINGS")
+		$Views/Settings/w/SubMenu.show()
+		$Views/Settings/w/OptionMenu.hide()
 

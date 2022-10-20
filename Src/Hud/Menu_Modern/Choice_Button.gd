@@ -5,7 +5,7 @@ const THEME_PATH = "res://Src/Hud/Menu_Modern/Menu_Modern.theme"
 
 signal choice_updated(config_value, choice_id)
 
-@export var title := "TITLE"
+@export var text := "TITLE"
 @export var config_value := "soundVolume"
 
 var bg_color_hover: Color
@@ -27,7 +27,7 @@ func _ready():
 	font_color_hover = menu_theme.get_color("font_hover_color", "Button")
 	# This could be optimized by doing it on higher level and pass down the colors
 
-	$h/Label.set_text(str(title))
+	$h/Label.set_text(str(text))
 	$h/Label.set("theme_override_colors/font_color", font_color_normal)
 	$h/Option.set("theme_override_colors/font_color", font_color_normal)
 	$h/ButtonLast.set("theme_override_colors/font_color", font_color_normal)
@@ -46,6 +46,9 @@ func switch(direction: int):
 	emit_signal("choice_updated", selection_id)
 
 func set_choices(choices: Array, current_value):
+	pass
+
+func set_range(range: Array, current_value):
 	pass
 
 func _input(event):

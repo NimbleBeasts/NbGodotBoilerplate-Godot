@@ -25,9 +25,9 @@ This is a simple kickstarter project for Godot projects. It comes with some stan
 
 ---
 
-# Basics
+# 1. Basics
 
-## File Structure
+## 1.1 File Structure
 
 - Assets -> All Resources Go Here
 
@@ -45,7 +45,7 @@ This is a simple kickstarter project for Godot projects. It comes with some stan
 
 ---
 
-## Autoloads / Globals / Singletons
+## 1.2 Autoloads / Globals / Singletons
 
 The scripts are arranged in the include sequence order.
 
@@ -55,6 +55,26 @@ The scripts are arranged in the include sequence order.
 | Types.gd  | Types  | Place to define global enumerations which are used in multiple scenes.                                                               |
 | Events.gd | Events | Signal Driven Event. Place to define global signals and the connector function.                                                      |
 | Debug.gd  | Debug  | Debug Console Menu. Can be used as a cheat menu for debugging purpose.                                                               |
+
+---
+
+## 1.3 Configuration Builder
+
+The default user configuration is now derived from a user config model. This model describes the default values as well as ranges and types for each config value.
+Initializing the core will parse the model to derive the default user config which will be stored in the user config file on first start.
+The user config model is therefore split in two parts: 'meta' for non-configurable values like the 'configVersion' and 'configurable' for configuration options which can be altered by the user.
+After parsing the configuration options can be accessed like this:
+
+```gdscript
+	var is_fullscreen = Global.user_config.video.fullscreen
+```
+
+The settings menu is generated based on the user config model. This way the settings menu is always up to date and can be extended easily.
+
+---
+
+
+## 1.4 Menu
 
 ---
 

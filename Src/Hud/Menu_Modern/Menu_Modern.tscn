@@ -23,6 +23,11 @@ grow_vertical = 2
 color = Color(1, 0.152941, 0.752941, 1)
 script = ExtResource("1_2d2qc")
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 show_behind_parent = true
 scale = Vector2(0.5, 0.511111)
@@ -161,21 +166,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.0784314)
 
-[node name="ButtonBack" type="Button" parent="Views/Settings/w"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -40.0
-offset_right = 232.0
-offset_bottom = -8.0
-grow_vertical = 0
-theme = ExtResource("5_cqgsv")
-theme_override_fonts/font = ExtResource("3_e0p0v")
-text = "TR_MENU_B_BACK"
-alignment = 0
-
 [node name="Label" type="Label" parent="Views/Settings/w"]
 layout_mode = 0
 offset_top = -40.0
@@ -207,6 +197,21 @@ offset_right = -376.0
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ButtonBack" type="Button" parent="Views/Settings/w"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -40.0
+offset_right = 232.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme = ExtResource("5_cqgsv")
+theme_override_fonts/font = ExtResource("3_e0p0v")
+text = "TR_MENU_B_BACK"
+alignment = 0
 
 [connection signal="button_up" from="Views/MainMenu/v/ButtonResume" to="." method="_on_button_resume_button_up"]
 [connection signal="button_up" from="Views/MainMenu/v/ButtonNewGame" to="." method="_on_button_new_game_button_up"]
