@@ -63,7 +63,7 @@ func _setup_option_menu(category: String):
 		if option.has("values"):
 			choice_button.set_choices(option.values, option.default)
 		else:
-			choice_button.set_range(option.range, option.default)
+			choice_button.set_range(option.range, option.default, option.step)
 		choice_button.connect("button_up", callback)
 		$Views/Settings/w/OptionMenu.add_child(choice_button)
 
