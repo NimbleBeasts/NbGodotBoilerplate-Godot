@@ -12,10 +12,11 @@ var bg_color_hover: Color
 var font_color_hover: Color
 var font_color_normal: Color
 
-var id := -1
-var active := false
-var selection_id := 0
-var choices := ["1", "2", "3"]
+var _active := false
+var _choices := []
+var _range := []
+var _range_step := 1.0
+var _current_value 
 
 func _ready():
 	# Choice Button Colors
@@ -37,32 +38,51 @@ func _ready():
 
 
 func switch(direction: int):
-	selection_id += direction
+	_current_value += direction * _range_step
 	
-	if selection_id < 0: selection_id = choices.size() - 1
-	elif selection_id == choices.size(): selection_id = 0
 	
-	$h/Option.set_text(str(choices[selection_id]))
-	emit_signal("choice_updated", selection_id)
+	if _choices.size() > 0:
+		if _current_value < 0: _current_value = _choices.size() - 1
+		elif _current_value == _choices.size(): _current_value = 0
+		$h/Option.set_text(str(_choices[_current_value]))
+	else:
+		_current_value = min(max(_current_value, _range[0]), _range[1])
+		$h/Option.set_text(str(_current_value))
+		
+	emit_signal("choice_updated", _current_value)
 
-func set_choices(choices: Array, current_value):
-	pass
+func set_choices(choices: Array, current_value: int):
+	_choices = choices
+	_current_value = current_value
+	$h/Option.set_text(str(_choices[_current_value]))
+	
 
-func set_range(range: Array, current_value):
-	pass
+func set_range(range: Array, current_value: float, step: float):
+	_range = range
+	_range_step = step
+	_current_value = current_value
+	$h/Option.set_text(str(_current_value))
 
 func _input(event):
-	if not active:
+	if not _active:
 		return
+	# Keyboard input
 	if event is InputEventKey:
 		if not event.pressed:
 			if event.keycode == KEY_RIGHT:
 				switch(+1)
 			elif event.keycode == KEY_LEFT:
 				switch(-1)
+	# Joypad input
+	elif event is InputEventJoypadButton:
+		if not event.pressed:
+			if event.button_index == JOY_BUTTON_DPAD_RIGHT:
+				switch(+1)
+			elif event.button_index == JOY_BUTTON_DPAD_LEFT:
+				switch(-1)
 
 func _on_focus_entered():
-	active = true
+	_active = true
 	$Bg.show()
 	$h/Label.set("theme_override_colors/font_color", font_color_hover)
 	$h/Option.set("theme_override_colors/font_color", font_color_hover)
@@ -70,7 +90,7 @@ func _on_focus_entered():
 	$h/ButtonNext.set("theme_override_colors/font_color", font_color_hover)
 
 func _on_focus_exited():
-	active = false
+	_active = false
 	$Bg.hide()
 	$h/Label.set("theme_override_colors/font_color", font_color_normal)
 	$h/Option.set("theme_override_colors/font_color", font_color_normal)

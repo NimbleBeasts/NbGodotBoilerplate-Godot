@@ -114,6 +114,7 @@ const USER_CONFIG_MODEL := {
 						0.5,
 						1.5
 					],
+					"step": 0.1,
 					"default": 1.0,
 				},
 			]
@@ -129,6 +130,7 @@ const USER_CONFIG_MODEL := {
 						0,
 						100
 					],
+					"step": 5,
 					"default": 50,
 				},
 				{
@@ -138,6 +140,7 @@ const USER_CONFIG_MODEL := {
 						0,
 						100
 					],
+					"step": 5,
 					"default": 50,
 				},
 			]
