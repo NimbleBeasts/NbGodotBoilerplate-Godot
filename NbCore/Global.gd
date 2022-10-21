@@ -28,7 +28,7 @@ func core_load_user_config(schema: Dictionary) -> Dictionary:
 	# Migration check - Upgrade config if needed
 	if _core_cfg.user_config.auto_upgrade or _core_cfg.user_config.sanity_check:
 		if read_data.configVersion < _core_cfg.user_config.version or _core_cfg.user_config.sanity_check:
-			read_data = coure_upgrade_user_config(read_data, schema)
+			read_data = core_upgrade_user_config(read_data, schema)
 
 	return read_data
 
@@ -38,7 +38,7 @@ func core_save_user_config(data: Dictionary) -> void:
 	file.store_string(JSON.new().stringify(data))
 
 ## Merge attributes from schema to data. Works also as sanity check when user corrupted the cfg.
-func coure_upgrade_user_config(data: Dictionary, schema: Dictionary) -> Dictionary:
+func core_upgrade_user_config(data: Dictionary, schema: Dictionary) -> Dictionary:
 	data.merge(schema)
 	data.configVersion = schema.configVersion
 	

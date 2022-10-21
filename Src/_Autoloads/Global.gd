@@ -45,13 +45,13 @@ var core_config := {
 	},
 	"video": {
 		"supported_resolutions": [
-			#Vector2(320, 180),
-			#Vector2(640, 360),
-			Vector2(1280, 720), #our default
-			Vector2(1366, 768), #7.47%
-			Vector2(1920, 1080), #67.60%
-			Vector2(2560, 1440), #8.23%
-			Vector2(3840, 2160) #2.41%
+			#Vector2i(320, 180),
+			#Vector2i(640, 360),
+			Vector2i(1280, 720), #our default
+			Vector2i(1366, 768), #7.47%
+			Vector2i(1920, 1080), #67.60%
+			Vector2i(2560, 1440), #8.23%
+			Vector2i(3840, 2160) #2.41%
 		],
 		"support_fullscreen": true,
 		"upscaler": {
@@ -88,6 +88,7 @@ const USER_CONFIG_MODEL := {
 						Vector2(3840, 2160) #2.41%
 					],
 					"default": 0,
+					"signal": "menu_resolution_changed"
 				},
 				{
 					"name": "fullscreen",
@@ -97,6 +98,7 @@ const USER_CONFIG_MODEL := {
 						true
 					],
 					"default": 0,
+					"signal": "menu_fullscreen_changed"
 				},
 				{
 					"name": "vsync",
@@ -106,6 +108,7 @@ const USER_CONFIG_MODEL := {
 						true
 					],
 					"default": 1,
+					"signal": "menu_vsync_changed"
 				},
 				{
 					"name": "brightness",
@@ -116,6 +119,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 0.1,
 					"default": 1.0,
+					"signal": "menu_vsync_changed"
 				},
 			]
 		},
@@ -132,6 +136,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 5,
 					"default": 50,
+					"signal": "menu_sound_changed"
 				},
 				{
 					"name": "music",
@@ -142,6 +147,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 5,
 					"default": 50,
+					"signal": "menu_music_changed"
 				},
 			]
 		},
@@ -156,6 +162,7 @@ const USER_CONFIG_MODEL := {
 						"TR_MENU_SETTINGS_LANGUAGE_EN"
 					],
 					"default": 0,
+					"signal": "menu_language_change"
 				}
 			]
 		}

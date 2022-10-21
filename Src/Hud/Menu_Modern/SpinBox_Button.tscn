@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc4m8ky5t0vnn"]
+[gd_scene load_steps=3 format=3 uid="uid://cenh3dwsgia4p"]
 
-[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Choice_Button.gd" id="1_wh40g"]
-[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_lcms7"]
+[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/SpinBox_Button.gd" id="1_4slu1"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_8w8nt"]
 
-[node name="ChoiceButton" type="Control"]
+[node name="SpinBoxButton" type="Control"]
 custom_minimum_size = Vector2i(512, 40)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 512.0
 offset_bottom = 40.0
 focus_mode = 2
-script = ExtResource("1_wh40g")
+script = ExtResource("1_4slu1")
 
 [node name="Bg" type="ColorRect" parent="."]
 visible = false
@@ -35,7 +35,7 @@ offset_right = 40.0
 offset_bottom = 33.0
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
-theme_override_fonts/font = ExtResource("2_lcms7")
+theme_override_fonts/font = ExtResource("2_8w8nt")
 text = "TITLE"
 
 [node name="Filler" type="Control" parent="h"]
@@ -66,7 +66,7 @@ offset_right = 468.0
 offset_bottom = 33.0
 mouse_filter = 1
 theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
-theme_override_fonts/font = ExtResource("2_lcms7")
+theme_override_fonts/font = ExtResource("2_8w8nt")
 text = "OPTION1"
 horizontal_alignment = 1
 clip_text = true

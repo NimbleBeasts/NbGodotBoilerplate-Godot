@@ -19,16 +19,20 @@ signal menu_popup()
 signal menu_back()
 
 ###########################################################################
-# Config Changes
+# User Config Changes
 ###########################################################################
-## Emitted if sound volume is changed in menus
-signal cfg_sound_set_volume(new)
-## Emitted if music volume is changed in menus
-signal cfg_music_set_volume(new)
-## Emitted if fullscreen mode is changed in menus
-signal cfg_switch_fullscreen(value)
-## Emitted if the brightness is changed in menus
-signal cfg_change_brightness(value)
-## Emitted if the contrast is changed in menus
-signal cfg_change_contrast(value)
+## Emitted if sound volume has changed in menus
+signal menu_sound_changed(new)
+## Emitted if music volume has changed in menus
+signal menu_music_changed(new)
+## Emitted if resolution has changed in menus
+signal menu_resolution_changed(value)
+## Emitted if fullscreen mode has changed in menus
+signal menu_fullscreen_changed(value)
+## Emitted if vsync mode has changed in menus
+signal menu_vsync_changed(value)
+## Emitted if the brightness has changed in menus
+signal menu_brightness_change(value)
+## Emitted if the language has changed in menus
+signal menu_language_change(value)
 
