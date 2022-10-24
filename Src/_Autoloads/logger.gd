@@ -113,14 +113,16 @@ func _write(flag: TraceLevelFlags, message: String):
 		
 	if _config.stdout_trace_level_flags & flag:
 		var string := ""
-		if _config.rich_text:
+		string = flag_name + ": " + message
+		
+		if flag == Logger.TraceLevelFlags.TRACE_DEBUG:
+			print_debug(string)
+		elif _config.rich_text:
 			print_rich("[color=" + color + "]" + flag_name + "[/color]: " + message)
 		else:
-			string = flag_name + ": " + message
-			if flag != Logger.TraceLevelFlags.TRACE_DEBUG:
-				print(string)
-			else:
-				print_debug(string)
+			print(string)
+
+				
 	if _config.console_trace_level_flags & flag:
 		pass
 	if _config.remote_trace_level_flags & flag:
