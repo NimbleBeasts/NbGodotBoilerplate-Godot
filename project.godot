@@ -30,9 +30,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Src/_Autoloads/Global.gd"
+Logger="*res://Src/_Autoloads/logger.gd"
 Types="*res://Src/_Autoloads/Types.gd"
 Events="*res://Src/_Autoloads/Events.gd"
+Global="*res://Src/_Autoloads/Global.gd"
 Debug="*res://Src/_Autoloads/Debug.gd"
 
 [debug]

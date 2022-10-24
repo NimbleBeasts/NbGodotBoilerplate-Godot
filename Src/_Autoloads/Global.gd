@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ###############################################################################
-extends "res://NbCore/Global.gd"
+extends "res://NbCore/core_global.gd"
 ##
 ## Global singleton
 ##
@@ -31,11 +31,12 @@ extends "res://NbCore/Global.gd"
 const GAME_VERSION = 1.0
 const CONFIG_VERSION = 1
 
-
-
+# TODO: make configs configurable and preload
+var test = preload("res://Src/Configs/Core_Config.gd").new().test
 
 ## Boilerplate config
 var core_config := {
+	"debug": true,
 	"rng_default_seed": 0,
 	"devlog_url": "https://raw.githubusercontent.com/NimbleBeasts/NbGodotBoilerplate/master/_Org/devlog/Boilerplate_"+ "%0.1f" % GAME_VERSION +".txt",
 	"user_config": {
@@ -45,23 +46,49 @@ var core_config := {
 	},
 	"video": {
 		"supported_resolutions": [
-			#Vector2(320, 180),
-			#Vector2(640, 360),
-			Vector2(1280, 720), #our default
-			Vector2(1366, 768), #7.47%
-			Vector2(1920, 1080), #67.60%
-			Vector2(2560, 1440), #8.23%
-			Vector2(3840, 2160) #2.41%
+			#Vector2i(320, 180),
+			#Vector2i(640, 360),
+			Vector2i(1280, 720), #our default
+			Vector2i(1366, 768), #7.47%
+			Vector2i(1920, 1080), #67.60%
+			Vector2i(2560, 1440), #8.23%
+			Vector2i(3840, 2160) #2.41%
 		],
 		"support_fullscreen": true,
 		"upscaler": {
 			"enabled": true,
 			"base_resolution": Vector2(320, 180),
 		}
-		
-			
-	}
-	
+	},
+	"logger": {
+		"output_option_flags": 0,
+		"file": {
+			"file_name": "log.txt",
+			"file_path": "user://",
+			"time_stamp": true,
+			"trace_level_flags":
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING
+		},
+		"stdout": {
+			"rich_text": true,
+			"trace_level_flags":
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING |
+				Logger.TraceLevelFlags.TRACE_INFO |
+				Logger.TraceLevelFlags.TRACE_DEBUG,
+		},
+		"console": {
+			"trace_level_flags": 
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING |
+				Logger.TraceLevelFlags.TRACE_INFO
+		},
+		"remote": {
+			"trace_level_flags": 
+				Logger.TraceLevelFlags.TRACE_ERROR
+		},
+	},
 }
 
 
@@ -88,6 +115,7 @@ const USER_CONFIG_MODEL := {
 						Vector2(3840, 2160) #2.41%
 					],
 					"default": 0,
+					"signal": "menu_resolution_changed"
 				},
 				{
 					"name": "fullscreen",
@@ -97,6 +125,7 @@ const USER_CONFIG_MODEL := {
 						true
 					],
 					"default": 0,
+					"signal": "menu_fullscreen_changed"
 				},
 				{
 					"name": "vsync",
@@ -106,6 +135,7 @@ const USER_CONFIG_MODEL := {
 						true
 					],
 					"default": 1,
+					"signal": "menu_vsync_changed"
 				},
 				{
 					"name": "brightness",
@@ -116,6 +146,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 0.1,
 					"default": 1.0,
+					"signal": "menu_vsync_changed"
 				},
 			]
 		},
@@ -132,6 +163,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 5,
 					"default": 50,
+					"signal": "menu_sound_changed"
 				},
 				{
 					"name": "music",
@@ -142,6 +174,7 @@ const USER_CONFIG_MODEL := {
 					],
 					"step": 5,
 					"default": 50,
+					"signal": "menu_music_changed"
 				},
 			]
 		},
@@ -156,6 +189,7 @@ const USER_CONFIG_MODEL := {
 						"TR_MENU_SETTINGS_LANGUAGE_EN"
 					],
 					"default": 0,
+					"signal": "menu_language_change"
 				}
 			]
 		}
@@ -197,16 +231,33 @@ func parse_user_config_model(model: Dictionary) -> Dictionary:
 
 func _ready():
 	core_init(core_config)
+	
+	Logger.setup(core_config)
+	
 	user_config = parse_user_config_model(USER_CONFIG_MODEL)
 	
 	# Load user config file
 	user_config = core_load_user_config(user_config)
+	
+#	print("Logger::::")
+#	Logger.info("Test info")
+#	Logger.warn("Test warn")
+#	Logger.error("Test error")
+#	Logger.error("Test error2")
+#	Logger.error("Test error3")
+#	Logger.debug("Test debug")
+#	print("::::::::::::::::")
+	
 
 	# Video Setup
-	
-	
+	# TODO
 	_event_signal_setup()
 
+	
+
+	
+	
+	
 func _event_signal_setup():
 	pass
 
