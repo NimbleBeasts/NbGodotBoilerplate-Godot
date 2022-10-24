@@ -80,10 +80,6 @@ func setup(core_config_logger: Dictionary):
 			_config.remote_trace_level_flags = core_config_logger.logger.remote.trace_level_flags
 	return
 
-func _get_time_stamp():
-	var time = Time.get_time_dict_from_system()
-	return '%02d:%02d:%02d' % [time.hour, time.minute, time.second]
-
 func _write(flag: TraceLevelFlags, message: String):
 	var flag_name := ""
 	var color := ""
@@ -110,7 +106,7 @@ func _write(flag: TraceLevelFlags, message: String):
 		file.seek_end()
 		var string := ""
 		if _config.time_stamp:
-			string = _get_time_stamp() + " " + flag_name + ": " + message
+			string = Time.get_datetime_string_from_system() + " " + flag_name + ": " + message
 		else:
 			string = flag_name + ": " + message
 		file.store_line(string)

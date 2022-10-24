@@ -18,6 +18,9 @@ signal change_music(track_id)
 signal menu_popup()
 signal menu_back()
 
+
+signal take_screenshot()
+
 ###########################################################################
 # User Config Changes
 ###########################################################################

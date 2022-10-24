@@ -44,6 +44,7 @@ var core_config := {
 		"auto_upgrade": true,
 		"sanity_check": true,
 	},
+	
 	"video": {
 		"supported_resolutions": [
 			#Vector2i(320, 180),
@@ -58,7 +59,8 @@ var core_config := {
 		"upscaler": {
 			"enabled": true,
 			"base_resolution": Vector2(320, 180),
-		}
+		},
+		"enable_screenshots": true,
 	},
 	"logger": {
 		"output_option_flags": 0,
@@ -254,7 +256,9 @@ func _ready():
 	_event_signal_setup()
 
 	
-
+func _process(delta):
+	if Input.is_action_just_pressed("ui_end"):
+		_core_take_screenshot()
 	
 	
 	
