@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ###############################################################################
-extends "res://NbCore/Global.gd"
+extends "res://NbCore/core_global.gd"
 ##
 ## Global singleton
 ##
@@ -31,11 +31,12 @@ extends "res://NbCore/Global.gd"
 const GAME_VERSION = 1.0
 const CONFIG_VERSION = 1
 
-
-
+# TODO: make configs configurable and preload
+var test = preload("res://Src/Configs/Core_Config.gd").new().test
 
 ## Boilerplate config
 var core_config := {
+	"debug": true,
 	"rng_default_seed": 0,
 	"devlog_url": "https://raw.githubusercontent.com/NimbleBeasts/NbGodotBoilerplate/master/_Org/devlog/Boilerplate_"+ "%0.1f" % GAME_VERSION +".txt",
 	"user_config": {
@@ -58,10 +59,36 @@ var core_config := {
 			"enabled": true,
 			"base_resolution": Vector2(320, 180),
 		}
-		
-			
-	}
-	
+	},
+	"logger": {
+		"output_option_flags": 0,
+		"file": {
+			"file_name": "log.txt",
+			"file_path": "user://",
+			"time_stamp": true,
+			"trace_level_flags":
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING
+		},
+		"stdout": {
+			"rich_text": true,
+			"trace_level_flags":
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING |
+				Logger.TraceLevelFlags.TRACE_INFO |
+				Logger.TraceLevelFlags.TRACE_DEBUG,
+		},
+		"console": {
+			"trace_level_flags": 
+				Logger.TraceLevelFlags.TRACE_ERROR |
+				Logger.TraceLevelFlags.TRACE_WARNING |
+				Logger.TraceLevelFlags.TRACE_INFO
+		},
+		"remote": {
+			"trace_level_flags": 
+				Logger.TraceLevelFlags.TRACE_ERROR
+		},
+	},
 }
 
 
@@ -204,16 +231,33 @@ func parse_user_config_model(model: Dictionary) -> Dictionary:
 
 func _ready():
 	core_init(core_config)
+	
+	Logger.setup(core_config)
+	
 	user_config = parse_user_config_model(USER_CONFIG_MODEL)
 	
 	# Load user config file
 	user_config = core_load_user_config(user_config)
+	
+#	print("Logger::::")
+#	Logger.info("Test info")
+#	Logger.warn("Test warn")
+#	Logger.error("Test error")
+#	Logger.error("Test error2")
+#	Logger.error("Test error3")
+#	Logger.debug("Test debug")
+#	print("::::::::::::::::")
+	
 
 	# Video Setup
-	
-	
+	# TODO
 	_event_signal_setup()
 
+	
+
+	
+	
+	
 func _event_signal_setup():
 	pass
 

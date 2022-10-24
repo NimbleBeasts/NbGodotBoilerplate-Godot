@@ -1,4 +1,4 @@
-extends "res://NbCore/Events.gd"
+extends "res://NbCore/core_events.gd"
 
 #warning-ignore-all:unused_signal
 

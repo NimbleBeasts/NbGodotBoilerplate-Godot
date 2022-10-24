@@ -149,7 +149,7 @@ func _on_button_settings_button_up():
 
 
 func _on_button_new_game_button_up():
-	pass # Replace with function body.
+	pass
 
 
 func _on_button_resume_button_up():
