@@ -48,8 +48,7 @@ func setup(core_config_logger: Dictionary):
 	# Check minimum config variables
 	if not core_config_logger.has("logger"):
 		return
-	if not core_config_logger.logger.has("output_option_flags"):
-		return
+
 
 	# Check file config
 	if core_config_logger.logger.has("file"):

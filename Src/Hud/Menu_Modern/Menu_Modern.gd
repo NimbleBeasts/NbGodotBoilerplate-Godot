@@ -1,8 +1,11 @@
 extends Control
 
 
-@export var config_button_scene: PackedScene = preload("res://Src/Hud/Menu_Modern/SpinBox_Button.tscn")
+
 @export var category_button_scene: PackedScene = preload("res://Src/Hud/Menu_Modern/Category_Button.tscn")
+@export var spinbox_button_scene: PackedScene = preload("res://Src/Hud/Menu_Modern/SpinBox_Button.tscn")
+@export var input_button_scene: PackedScene = preload("res://Src/Hud/Menu_Modern/Input_Button.tscn")
+@export var spacer_scene: PackedScene = preload("res://Src/Hud/Menu_Modern/Spacer.tscn")
 
 
 var _focus_object: Control = null
@@ -16,6 +19,17 @@ func _ready():
 	_init_menu()
 	
 	get_viewport().connect("gui_focus_changed", Callable(self, "_gui_focus_changed"))
+	
+	Events.connect("menu_control_key_assign_entered", Callable(self, "_window_assign_show"))
+	Events.connect("menu_control_key_assign_finished", Callable(self, "_window_assign_hide"))
+
+func _window_assign_show():
+	print("show")
+	$Views/Settings/WindowAssign.show()
+
+func _window_assign_hide():
+	print("hide")
+	$Views/Settings/WindowAssign.hide()
 
 
 func _input(event):
@@ -76,18 +90,35 @@ func _setup_submenu(category: String):
 	# Set submenu title
 	$Views/Settings/w/Label.set_text( Global.USER_CONFIG_MODEL.configurable[index].tr)
 	
+	# TODO: button remapper case
+	
 	for option in Global.USER_CONFIG_MODEL.configurable[index].options:
-		var callback = Callable(self, "_config_button_up")
-		callback = callback.bind(category)
-		callback = callback.bind(option.name)
-		var choice_button = config_button_scene.instantiate()
-		choice_button.text = tr(option.tr)
-		if option.has("values"):
-			choice_button.set_choices(option.values, Global.user_config[category][option.name])
+		if option.has("name"):
+			if option.has("keys"):
+				pass
+			else:
+				var callback = Callable(self, "_config_button_up")
+				callback = callback.bind(category)
+				callback = callback.bind(option.name)
+				var choice_button = spinbox_button_scene.instantiate()
+				choice_button.text = tr(option.tr)
+				if option.has("values"):
+					choice_button.set_choices(option.values, Global.user_config[category][option.name])
+				elif option.has("range"):
+					choice_button.set_range(option.range, Global.user_config[category][option.name], option.step)
+				choice_button.connect("spinbox_button_updated", callback)
+				$Views/Settings/w/OptionMenu.add_child(choice_button)
 		else:
-			choice_button.set_range(option.range, Global.user_config[category][option.name], option.step)
-		choice_button.connect("spinbox_button_updated", callback)
-		$Views/Settings/w/OptionMenu.add_child(choice_button)
+			if option.has("tr"):
+				_setup_submenu_add_spacer(option)
+			else:
+				Logger.debug("invalid configuration option found")
+
+
+func _setup_submenu_add_spacer(option: Dictionary):
+	var spacer = spacer_scene.instantiate()
+	spacer.set_text(tr(option.tr))
+	$Views/Settings/w/OptionMenu.add_child(spacer)
 
 
 func _config_button_up(value, option, category):

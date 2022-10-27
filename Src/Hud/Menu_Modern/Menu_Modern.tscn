@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://h0cd34qp2x1g"]
+[gd_scene load_steps=7 format=3 uid="uid://dlfvdf6vjjl32"]
 
 [ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Menu_Modern.gd" id="1_2d2qc"]
 [ext_resource type="Shader" path="res://Src/Hud/Menu_Modern/blur.gdshader" id="1_ya4wp"]
 [ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="3_e0p0v"]
 [ext_resource type="Theme" uid="uid://b3q625u7kqhr4" path="res://Src/Hud/Menu_Modern/Menu_Modern.theme" id="5_cqgsv"]
+[ext_resource type="PackedScene" uid="uid://keao0a0eix1y" path="res://Src/Hud/Menu_Modern/Input_Button.tscn" id="5_n00ty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xd3ah"]
 shader = ExtResource("1_ya4wp")
@@ -23,11 +24,13 @@ color = Color(1, 0.152941, 0.752941, 1)
 script = ExtResource("1_2d2qc")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="BgOverlay" type="ColorRect" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,7 +39,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.278431)
 
 [node name="Views" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,7 +48,7 @@ grow_vertical = 2
 
 [node name="MainMenu" type="Control" parent="Views"]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -53,6 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="v" type="VBoxContainer" parent="Views/MainMenu"]
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 32.0
@@ -64,6 +68,7 @@ alignment = 2
 
 [node name="ButtonResume" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 48.0
 offset_right = 226.0
 offset_bottom = 88.0
@@ -75,6 +80,7 @@ alignment = 0
 
 [node name="ButtonNewGame" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 92.0
 offset_right = 226.0
 offset_bottom = 132.0
@@ -86,6 +92,7 @@ alignment = 0
 
 [node name="ButtonSaveGame" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 136.0
 offset_right = 226.0
 offset_bottom = 176.0
@@ -97,6 +104,7 @@ alignment = 0
 
 [node name="ButtonLoadGame" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 180.0
 offset_right = 226.0
 offset_bottom = 220.0
@@ -108,6 +116,7 @@ alignment = 0
 
 [node name="ButtonSettings" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 224.0
 offset_right = 226.0
 offset_bottom = 264.0
@@ -119,6 +128,7 @@ alignment = 0
 
 [node name="ButtonQuit" type="Button" parent="Views/MainMenu/v"]
 custom_minimum_size = Vector2i(0, 40)
+layout_mode = 2
 offset_top = 268.0
 offset_right = 226.0
 offset_bottom = 308.0
@@ -129,7 +139,7 @@ clip_text = true
 alignment = 0
 
 [node name="Settings" type="Control" parent="Views"]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -138,6 +148,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="w" type="ColorRect" parent="Views/Settings"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -150,6 +161,7 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0.0784314)
 
 [node name="Label" type="Label" parent="Views/Settings/w"]
+layout_mode = 0
 offset_top = -40.0
 offset_right = 228.0
 offset_bottom = -3.0
@@ -158,6 +170,7 @@ theme_override_font_sizes/font_size = 24
 text = "TR_MENU_SETTINGS"
 
 [node name="SubMenu" type="VBoxContainer" parent="Views/Settings/w"]
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 8.0
@@ -167,6 +180,7 @@ offset_bottom = -48.0
 grow_vertical = 2
 
 [node name="OptionMenu" type="VBoxContainer" parent="Views/Settings/w"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -178,6 +192,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ButtonBack" type="Button" parent="Views/Settings/w"]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -192,6 +207,7 @@ text = "TR_MENU_B_BACK"
 alignment = 0
 
 [node name="ButtonAccept" type="Button" parent="Views/Settings/w"]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -204,6 +220,33 @@ theme = ExtResource("5_cqgsv")
 theme_override_fonts/font = ExtResource("3_e0p0v")
 text = "TR_MENU_B_ACCEPT"
 alignment = 0
+
+[node name="WindowAssign" type="Panel" parent="Views/Settings"]
+visible = false
+layout_mode = 0
+offset_left = 272.0
+offset_top = 192.0
+offset_right = 624.0
+offset_bottom = 312.0
+
+[node name="Label" type="Label" parent="Views/Settings/WindowAssign"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press any key to assign.
+Press ESC to cancel."
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="InputControlButton" parent="." instance=ExtResource("5_n00ty")]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 544.0
+offset_bottom = 88.0
 
 [connection signal="button_up" from="Views/MainMenu/v/ButtonResume" to="." method="_on_button_resume_button_up"]
 [connection signal="button_up" from="Views/MainMenu/v/ButtonNewGame" to="." method="_on_button_new_game_button_up"]
