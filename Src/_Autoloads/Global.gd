@@ -32,36 +32,42 @@ const GAME_VERSION = 1.0
 const CONFIG_VERSION = 1
 
 # TODO: make configs configurable and preload
-var test = preload("res://Src/Configs/Core_Config.gd").new().test
+var test = preload("res://Src/Configs/core_config.gd").new().test
 
 ## Boilerplate config
 var core_config := {
+	## Enables advanced debugging options.
 	"debug": true,
+	## Default seed for seed based RNG. (Opt.)
 	"rng_default_seed": 0,
+	
 	"devlog_url": "https://raw.githubusercontent.com/NimbleBeasts/NbGodotBoilerplate/master/_Org/devlog/Boilerplate_"+ "%0.1f" % GAME_VERSION +".txt",
+	## User config options
 	"user_config": {
+		## Latest config version
 		"version": 1,
+		## Upgrade existing config with new version options
 		"auto_upgrade": true,
+		## Repair config if needed
 		"sanity_check": true,
 	},
+	"controls": {
+		## Which input devices will be allowed for input remapping
+		"allowed_input_devices":
+			Types.InputDeviceType.Keyboard |
+			Types.InputDeviceType.Mouse |
+			Types.InputDeviceType.Joypad,
+	},
 	"video": {
-		"supported_resolutions": [
-			#Vector2i(320, 180),
-			#Vector2i(640, 360),
-			Vector2i(1280, 720), #our default
-			Vector2i(1366, 768), #7.47%
-			Vector2i(1920, 1080), #67.60%
-			Vector2i(2560, 1440), #8.23%
-			Vector2i(3840, 2160) #2.41%
-		],
 		"support_fullscreen": true,
 		"upscaler": {
 			"enabled": true,
 			"base_resolution": Vector2(320, 180),
-		}
+		},
+		"enable_screenshots": true,
 	},
 	"logger": {
-		"output_option_flags": 0,
+		## File based logging options. (Opt.)
 		"file": {
 			"file_name": "log.txt",
 			"file_path": "user://",
@@ -70,6 +76,7 @@ var core_config := {
 				Logger.TraceLevelFlags.TRACE_ERROR |
 				Logger.TraceLevelFlags.TRACE_WARNING
 		},
+		## Stdout logging options. (Opt.)
 		"stdout": {
 			"rich_text": true,
 			"trace_level_flags":
@@ -78,12 +85,14 @@ var core_config := {
 				Logger.TraceLevelFlags.TRACE_INFO |
 				Logger.TraceLevelFlags.TRACE_DEBUG,
 		},
+		## Console logging options. Not yet supported. (Opt.)
 		"console": {
 			"trace_level_flags": 
 				Logger.TraceLevelFlags.TRACE_ERROR |
 				Logger.TraceLevelFlags.TRACE_WARNING |
 				Logger.TraceLevelFlags.TRACE_INFO
 		},
+		## Remote logging options. Not yet supported. (Opt.)
 		"remote": {
 			"trace_level_flags": 
 				Logger.TraceLevelFlags.TRACE_ERROR
@@ -192,6 +201,25 @@ const USER_CONFIG_MODEL := {
 					"signal": "menu_language_change"
 				}
 			]
+		},
+		{
+			"name": "controls",
+			"tr": "TR_MENU_SETTINGS_CONTROLS",
+			"options": [
+				{
+					"tr": "TR_MENU_SETTINGS_CONTROL_CATEGORY_MOVEMENT",
+				},
+				{
+					"name": "control_up",
+					"tr": "TR_MENU_SETTINGS_CONTROL_UP",
+					"keys": [{ "type": 1, "device": 0, "code": 4194320 }, {}, {}, {}]
+				},
+				{
+					"name": "control_right",
+					"tr": "TR_MENU_SETTINGS_CONTROL_RIGHT",
+					"keys": [{}, {}, {}, {}]
+				},
+			]
 		}
 	]
 }
@@ -223,11 +251,55 @@ func parse_user_config_model(model: Dictionary) -> Dictionary:
 	for category in model.configurable:
 		var option_entry = {}
 		for option in category.options:
-			option_entry.merge({option.name: option.default})
+			if option.has("name"):
+				var value
+				if option.has("default"):
+					value = option.default
+				elif option.has("keys"):
+					value = option.keys
+				option_entry.merge({option.name: value})
 		config.merge({category.name: option_entry})
 
 	return config
 
+
+func input_config():
+	
+	
+	InputMap.add_action("control_up")
+	
+	# {type: "key", "code": 62}
+	# {type: "joy_button", "code": 14, "device": 0}
+	# {type: "joy_axes", "axis": 62, "direction": -1, "device": 0}
+	
+	# W
+	var ev = InputEventKey.new()
+	ev.keycode = KEY_W 
+	InputMap.action_add_event("control_up", ev)
+	# GP Up
+	ev = InputEventJoypadButton.new()
+	ev.button_index = JOY_BUTTON_DPAD_UP
+	InputMap.action_add_event("control_up", ev)
+	
+	# GP stick
+	# Using joypad for button just pressed events require a trick to reset default start positions
+	ev = InputEventJoypadMotion.new()
+	ev.axis = JOY_AXIS_LEFT_Y
+	ev.axis_value = -1.0
+	InputMap.action_add_event("control_up", ev)
+	
+	InputMap.add_action("control_down")
+	ev = InputEventJoypadMotion.new()
+	ev.axis = JOY_AXIS_LEFT_Y
+	ev.axis_value = 0.0
+	ev.device = 1
+	InputMap.action_add_event("control_down", ev)
+	
+	
+#	#print(InputMap.get_actions())
+#	print(InputMap.action_get_events("control_up"))
+	print(InputMap.action_get_events("control_down"))
+	#print(InputMap.action_get_events("test"))
 
 func _ready():
 	core_init(core_config)
@@ -238,6 +310,9 @@ func _ready():
 	
 	# Load user config file
 	user_config = core_load_user_config(user_config)
+	
+	
+	input_config()
 	
 #	print("Logger::::")
 #	Logger.info("Test info")
@@ -254,9 +329,22 @@ func _ready():
 	_event_signal_setup()
 
 	
+func _process(delta):
+	
+	if Input.is_action_just_pressed("control_up"):
+		print("up")
+	if Input.is_action_just_pressed("control_down"):
+		print("down")
+	if Input.is_action_just_pressed("ui_end"):
+		_core_take_screenshot()
+	
 
-	
-	
+func _input(event):
+	if event is InputEventJoypadMotion:
+		if event.axis == 1:
+			if abs(event.axis_value) > 0.95: 
+				print(event.device)
+
 	
 func _event_signal_setup():
 	pass

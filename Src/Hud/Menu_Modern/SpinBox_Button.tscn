@@ -14,7 +14,6 @@ script = ExtResource("1_4slu1")
 
 [node name="Bg" type="ColorRect" parent="."]
 visible = false
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +22,6 @@ grow_vertical = 2
 color = Color(0.956863, 0.956863, 0.956863, 0.862745)
 
 [node name="h" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,7 +30,6 @@ grow_vertical = 2
 focus_mode = 2
 
 [node name="Label" type="Label" parent="h"]
-layout_mode = 2
 offset_top = 7.0
 offset_right = 40.0
 offset_bottom = 33.0
@@ -42,7 +39,7 @@ theme_override_fonts/font = ExtResource("2_8w8nt")
 text = "TITLE"
 
 [node name="Filler" type="Control" parent="h"]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 44.0
 offset_right = 228.0
@@ -52,7 +49,6 @@ mouse_filter = 1
 
 [node name="ButtonLast" type="Label" parent="h"]
 custom_minimum_size = Vector2i(40, 0)
-layout_mode = 2
 offset_left = 232.0
 offset_top = 7.0
 offset_right = 272.0
@@ -64,7 +60,6 @@ horizontal_alignment = 1
 
 [node name="Option" type="Label" parent="h"]
 custom_minimum_size = Vector2i(192, 0)
-layout_mode = 2
 offset_left = 276.0
 offset_top = 7.0
 offset_right = 468.0
@@ -78,7 +73,6 @@ clip_text = true
 
 [node name="ButtonNext" type="Label" parent="h"]
 custom_minimum_size = Vector2i(40, 0)
-layout_mode = 2
 offset_left = 472.0
 offset_top = 7.0
 offset_right = 512.0

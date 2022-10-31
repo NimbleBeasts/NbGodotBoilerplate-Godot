@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://xclpjsr6c582"]
+
+[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Spacer.gd" id="1_rcor4"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_8w8nt"]
+
+[node name="Spacer" type="Control"]
+custom_minimum_size = Vector2i(512, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 40.0
+focus_mode = 2
+script = ExtResource("1_rcor4")
+
+[node name="Bg" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.956863, 0.956863, 0.956863, 0.501961)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+theme_override_fonts/font = ExtResource("2_8w8nt")
+text = "TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1

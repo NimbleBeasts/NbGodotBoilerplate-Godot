@@ -18,9 +18,16 @@ signal change_music(track_id)
 signal menu_popup()
 signal menu_back()
 
+
+signal take_screenshot()
+
 ###########################################################################
 # User Config Changes
 ###########################################################################
+
+signal menu_control_key_assign_entered()
+signal menu_control_key_assign_finished()
+
 ## Emitted if sound volume has changed in menus
 signal menu_sound_changed(new)
 ## Emitted if music volume has changed in menus

@@ -48,8 +48,7 @@ func setup(core_config_logger: Dictionary):
 	# Check minimum config variables
 	if not core_config_logger.has("logger"):
 		return
-	if not core_config_logger.logger.has("output_option_flags"):
-		return
+
 
 	# Check file config
 	if core_config_logger.logger.has("file"):
@@ -80,10 +79,6 @@ func setup(core_config_logger: Dictionary):
 			_config.remote_trace_level_flags = core_config_logger.logger.remote.trace_level_flags
 	return
 
-func _get_time_stamp():
-	var time = Time.get_time_dict_from_system()
-	return '%02d:%02d:%02d' % [time.hour, time.minute, time.second]
-
 func _write(flag: TraceLevelFlags, message: String):
 	var flag_name := ""
 	var color := ""
@@ -110,21 +105,23 @@ func _write(flag: TraceLevelFlags, message: String):
 		file.seek_end()
 		var string := ""
 		if _config.time_stamp:
-			string = _get_time_stamp() + " " + flag_name + ": " + message
+			string = Time.get_datetime_string_from_system() + " " + flag_name + ": " + message
 		else:
 			string = flag_name + ": " + message
 		file.store_line(string)
 		
 	if _config.stdout_trace_level_flags & flag:
 		var string := ""
-		if _config.rich_text:
+		string = flag_name + ": " + message
+		
+		if flag == Logger.TraceLevelFlags.TRACE_DEBUG:
+			print_debug(string)
+		elif _config.rich_text:
 			print_rich("[color=" + color + "]" + flag_name + "[/color]: " + message)
 		else:
-			string = flag_name + ": " + message
-			if flag != Logger.TraceLevelFlags.TRACE_DEBUG:
-				print(string)
-			else:
-				print_debug(string)
+			print(string)
+
+				
 	if _config.console_trace_level_flags & flag:
 		pass
 	if _config.remote_trace_level_flags & flag:

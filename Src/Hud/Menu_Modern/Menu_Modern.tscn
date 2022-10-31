@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://h0cd34qp2x1g"]
+[gd_scene load_steps=6 format=3 uid="uid://dlfvdf6vjjl32"]
 
 [ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Menu_Modern.gd" id="1_2d2qc"]
 [ext_resource type="Shader" path="res://Src/Hud/Menu_Modern/blur.gdshader" id="1_ya4wp"]
@@ -204,6 +204,24 @@ theme = ExtResource("5_cqgsv")
 theme_override_fonts/font = ExtResource("3_e0p0v")
 text = "TR_MENU_B_ACCEPT"
 alignment = 0
+
+[node name="WindowAssign" type="Panel" parent="Views/Settings"]
+visible = false
+offset_left = 272.0
+offset_top = 192.0
+offset_right = 624.0
+offset_bottom = 312.0
+
+[node name="Label" type="Label" parent="Views/Settings/WindowAssign"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press any key to assign.
+Press ESC to cancel."
+autowrap_mode = 2
+metadata/_edit_lock_ = true
 
 [connection signal="button_up" from="Views/MainMenu/v/ButtonResume" to="." method="_on_button_resume_button_up"]
 [connection signal="button_up" from="Views/MainMenu/v/ButtonNewGame" to="." method="_on_button_new_game_button_up"]

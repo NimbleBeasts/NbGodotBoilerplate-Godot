@@ -9,6 +9,27 @@ var _core_cfg := {}
 func core_init(config: Dictionary) -> void:
 	_core_cfg = config
 	_core_init_rng()
+	
+	
+	if _core_cfg.video.has("enable_screenshots") and _core_cfg.video.enable_screenshots:
+		Events.connect("take_screenshot", Callable(self, "_core_take_screenshot"))
+
+func _core_take_screenshot():
+	# Create dir if not exists
+	var dir = DirAccess.open("user://")
+	dir.make_dir("screenshot")
+	
+	# Get image from viewport
+	var image = get_viewport().get_texture().get_image()
+	var datetime = Time.get_datetime_string_from_system()
+	# YYYY-MM-DDTHH:MM:SS
+	# Replace ':'
+	datetime[13] = "-"
+	datetime[16] = "-"
+	# Store image to file
+	var file_name := "user://screenshot/screenshot_" + datetime + ".png"
+	image.save_png(file_name)
+	
 
 ## Load user config file. Create one if no cfg exists. Also does upgrade and sanity checks.
 func core_load_user_config(schema: Dictionary) -> Dictionary:

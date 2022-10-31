@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://keao0a0eix1y"]
+
+[ext_resource type="Script" path="res://Src/Hud/Menu_Modern/Input_Button.gd" id="1_ggpox"]
+[ext_resource type="FontFile" uid="uid://btmpm7wiopwuw" path="res://Assets/Fonts/OpenSans/OpenSans-Regular.ttf" id="2_8w8nt"]
+
+[node name="InputButton" type="Control"]
+custom_minimum_size = Vector2i(512, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 40.0
+focus_mode = 2
+script = ExtResource("1_ggpox")
+
+[node name="Bg" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.956863, 0.956863, 0.956863, 0.862745)
+
+[node name="h" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+
+[node name="Label" type="Label" parent="h"]
+layout_mode = 2
+offset_top = 7.0
+offset_right = 40.0
+offset_bottom = 33.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+theme_override_fonts/font = ExtResource("2_8w8nt")
+text = "TITLE"
+
+[node name="Filler" type="Control" parent="h"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 44.0
+offset_right = 208.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="Button0" type="Button" parent="h"]
+custom_minimum_size = Vector2i(72, 0)
+layout_mode = 2
+offset_left = 212.0
+offset_right = 284.0
+offset_bottom = 40.0
+focus_next = NodePath("../Button1")
+focus_previous = NodePath("../..")
+button_mask = 3
+
+[node name="Button1" type="Button" parent="h"]
+custom_minimum_size = Vector2i(72, 0)
+layout_mode = 2
+offset_left = 288.0
+offset_right = 360.0
+offset_bottom = 40.0
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../Button0")
+button_mask = 3
+
+[node name="Button2" type="Button" parent="h"]
+custom_minimum_size = Vector2i(72, 0)
+layout_mode = 2
+offset_left = 364.0
+offset_right = 436.0
+offset_bottom = 40.0
+focus_next = NodePath("../Button3")
+focus_previous = NodePath("../Button1")
+button_mask = 3
+
+[node name="Button3" type="Button" parent="h"]
+custom_minimum_size = Vector2i(72, 0)
+layout_mode = 2
+offset_left = 440.0
+offset_right = 512.0
+offset_bottom = 40.0
+focus_previous = NodePath("../Button2")
+button_mask = 3
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="button_up" from="h/Button0" to="." method="_on_button_0_button_up"]
+[connection signal="button_up" from="h/Button1" to="." method="_on_button_1_button_up"]
+[connection signal="button_up" from="h/Button2" to="." method="_on_button_2_button_up"]
+[connection signal="button_up" from="h/Button3" to="." method="_on_button_3_button_up"]
