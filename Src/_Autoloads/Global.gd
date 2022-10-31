@@ -212,7 +212,7 @@ const USER_CONFIG_MODEL := {
 				{
 					"name": "control_up",
 					"tr": "TR_MENU_SETTINGS_CONTROL_UP",
-					"keys": [{}, {}, {}, {}]
+					"keys": [{ "type": 1, "device": 0, "code": 4194320 }, {}, {}, {}]
 				},
 				{
 					"name": "control_right",

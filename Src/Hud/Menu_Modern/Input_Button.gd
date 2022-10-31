@@ -7,9 +7,6 @@ extends Control
 ## Theme to derive button colors from.
 @export var theme_scene: Theme = preload("res://Src/Hud/Menu_Modern/Menu_Modern.theme")
 
-## Title for the SpinBox Button.
-var text := "TITLE"
-
 ## Emitted when a key has been assigned.
 signal button_assigned(slot_id, key_event)
 
@@ -35,7 +32,6 @@ func _ready():
 	_font_color_normal = menu_theme.get_color("font_color", "Button")
 	_font_color_hover = menu_theme.get_color("font_hover_color", "Button")
 	# TODO: This could be optimized by doing it on higher level and pass down the colors
-	$h/Label.set_text(str(text))
 	$h/Label.set("theme_override_colors/font_color", _font_color_normal)
 #	$h/Option.set("theme_override_colors/font_color", _font_color_normal)
 #	$h/ButtonLast.set("theme_override_colors/font_color", _font_color_normal)
@@ -46,14 +42,27 @@ func _ready():
 	connect("button_assigned", Callable(self, "_button_assigned"))
 	# TODO feedback loop and remove double assigned buttons
 
+func set_text(string: String):
+	$h/Label.set_text(string)
+
+func _update_button_text(button: Button, text):
+	#TODO mapping to readable 
+	button.text = text
+
 func _button_assigned(a, b):
 	if _set_key:
 		print("my button assigned")
 	else:
 		print("other button assigned")
 
-func _set_key_data(data: Array):
+func set_key_data(data: Array):
 	_key_data = data
+	var i := 0
+	for entry in _key_data:
+		var node := get_node("h/Button" + str(i))
+		if entry.size() > 0:
+			node.text = str(entry.code)
+		i += 1
 
 func _focus_button(direction: int):
 	if _focused_button == null:

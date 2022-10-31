@@ -95,19 +95,9 @@ func _setup_submenu(category: String):
 	for option in Global.USER_CONFIG_MODEL.configurable[index].options:
 		if option.has("name"):
 			if option.has("keys"):
-				pass
+				_setup_submenu_add_input(category, option)
 			else:
-				var callback = Callable(self, "_config_button_up")
-				callback = callback.bind(category)
-				callback = callback.bind(option.name)
-				var choice_button = spinbox_button_scene.instantiate()
-				choice_button.text = tr(option.tr)
-				if option.has("values"):
-					choice_button.set_choices(option.values, Global.user_config[category][option.name])
-				elif option.has("range"):
-					choice_button.set_range(option.range, Global.user_config[category][option.name], option.step)
-				choice_button.connect("spinbox_button_updated", callback)
-				$Views/Settings/w/OptionMenu.add_child(choice_button)
+				_setup_submenu_add_spinbox(category, option)
 		else:
 			if option.has("tr"):
 				_setup_submenu_add_spacer(option)
@@ -115,11 +105,41 @@ func _setup_submenu(category: String):
 				Logger.debug("invalid configuration option found")
 
 
+func _setup_submenu_add_input(category: String, option: Dictionary):
+	var callback := Callable(self, "_input_button_up")
+	callback = callback.bind(category)
+	callback = callback.bind(option.name)
+	var input_button := input_button_scene.instantiate()
+	input_button.set_text(tr(option.tr))
+	input_button.set_key_data(option.keys)
+	input_button.connect("button_assigned", callback)
+	$Views/Settings/w/OptionMenu.add_child(input_button)
+
+func _setup_submenu_add_spinbox(category: String, option: Dictionary):
+	var callback := Callable(self, "_config_button_up")
+	callback = callback.bind(category)
+	callback = callback.bind(option.name)
+	var choice_button := spinbox_button_scene.instantiate()
+	choice_button.text = tr(option.tr)
+	if option.has("values"):
+		choice_button.set_choices(option.values, Global.user_config[category][option.name])
+	elif option.has("range"):
+		choice_button.set_range(option.range, Global.user_config[category][option.name], option.step)
+	choice_button.connect("spinbox_button_updated", callback)
+	$Views/Settings/w/OptionMenu.add_child(choice_button)
+
 func _setup_submenu_add_spacer(option: Dictionary):
 	var spacer = spacer_scene.instantiate()
 	spacer.set_text(tr(option.tr))
 	$Views/Settings/w/OptionMenu.add_child(spacer)
 
+func _input_button_up(slot_id, key_event, option, category):
+	print("---")
+	print(slot_id)
+	print(key_event)
+	print(option)
+	print(category)
+	print("---")
 
 func _config_button_up(value, option, category):
 	# Check if pending change entry exists
